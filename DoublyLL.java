@@ -47,6 +47,8 @@ public class DoublyLL {
         tail = newNode;
     }
 
+    // removeFirst
+
     public  int removeFirst(){
         if(head == null){
             return Integer.MIN_VALUE;
