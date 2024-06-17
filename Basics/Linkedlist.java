@@ -16,7 +16,7 @@ public class Linkedlist {
     static int size = 0;
 
     // print linkedlist
-    public static void printLL(node head){
+    public static void printLL(){
         // base case
         if(head == null){
             System.out.println("Linkedlist is empty");
@@ -24,11 +24,12 @@ public class Linkedlist {
         }
 
         node temp = head;
-        while (temp !=tail) {
+        while (temp != null) {
             System.out.print(temp.data + "->");
             temp = temp.next;
         }
-        System.err.print(tail.data);
+        System.out.print("null");
+        System.out.println();
     }
 
     // calulate size
@@ -113,6 +114,46 @@ public class Linkedlist {
 
         return temp;
     }
+
+    public static int removeFirst(){
+        // base case
+        if(head == null){
+            System.out.println("LL is empty");
+            return -1;
+        }
+        // if we have only one node
+        int value = head.data;
+
+        if(head.next == null){
+            head = tail = null;
+            return value;
+        }
+       
+        head = head.next;       // if we have other node also 
+        return value;
+    }
+
+    public static int removeLast(){
+        if (head== null) {
+            return -1;
+        }else if (head.next == null) {
+            int val = head.data;
+            head = tail = null;
+            return val;
+        }
+
+        // search prev node of tail node
+        node temp = head;
+        while (temp.next != tail) {
+            temp = temp.next;
+        }
+
+        // now temp is the prev elem of tail node
+        int val = tail.data;
+        temp.next = null;
+        tail = temp;
+        return val;
+    }
     public static void main(String[] args) {
         Linkedlist ll = new Linkedlist();   // create an object of Linkedlist class
         ll.addFirst(3);
@@ -121,11 +162,12 @@ public class Linkedlist {
         ll.addFirst(0);
         ll.addLast(10);
         ll.addLast(15);
-        ll.printLL(head);
+        ll.printLL();
+        System.out.println(ll.removeFirst());
         System.out.println();
-        System.out.println(  "Size of linkedlist "+ ll.sizeOfLL(head));
-        ll.addInMiddle(3, 60);
-        ll.printLL(head);
+        ll.printLL();
+        System.out.println(ll.removeLast());
+        ll.printLL();
 
     }
     
