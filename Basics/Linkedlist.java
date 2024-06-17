@@ -25,10 +25,10 @@ public class Linkedlist {
 
         node temp = head;
         while (temp != null) {
-            System.out.print(temp.data + "->");
+            System.out.print(temp.data + " ");
             temp = temp.next;
         }
-        System.out.print("null");
+        System.out.print("");
         System.out.println();
     }
 
@@ -154,19 +154,50 @@ public class Linkedlist {
         tail = temp;
         return val;
     }
+
+    // search a key in a linkedlist in a recursive way
+    public static int searchKeyIdx(node root, int idx, int key){
+        // base case
+        if(root == null){
+            return -1;
+        }
+
+        // work
+        if (root.data == key) {
+            return idx;
+        }
+
+        // inner call
+       return searchKeyIdx(root.next, idx+1, key);
+    }
+
+    public static void reverseLL(){
+        node prev = null;
+        node curr = tail = head;
+        node next = null;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        // after getting out from the loop, curr hold null so prev hold the last node which is tail
+        head =  prev;
+    }
+
     public static void main(String[] args) {
         Linkedlist ll = new Linkedlist();   // create an object of Linkedlist class
-        ll.addFirst(3);
-        ll.addFirst(2);
-        ll.addFirst(1);
         ll.addFirst(0);
-        ll.addLast(10);
-        ll.addLast(15);
+        ll.addLast(12);
+        ll.addLast(25);
+        ll.addLast(83);
+        ll.addLast(42);
+        ll.addLast(65);
+
         ll.printLL();
-        System.out.println(ll.removeFirst());
-        System.out.println();
-        ll.printLL();
-        System.out.println(ll.removeLast());
+        System.out.println(ll.searchKeyIdx(head, 0, 12));
+        ll.reverseLL();
         ll.printLL();
 
     }
